@@ -1,0 +1,904 @@
+```html
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portofolio Masria ✨ | Siswa Baru Tolitoli</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            poppins: ['Poppins', 'sans-serif'],
+          },
+          colors: {
+            tolitoli: {
+              50: '#f0fdfa',
+              100: '#ccfbf1',
+              500: '#14b8a6',
+              600: '#0d9488',
+              700: '#0f766e',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Google Fonts: Poppins -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- Canvas Confetti Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .dark .glass-card {
+      background: rgba(30, 41, 59, 0.85);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #0d9488, #0284c7, #6366f1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-float {
+      animation: float 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 dark:bg-slate-900 text-slate-800 dark:text-slate-100 transition-colors duration-300 min-h-screen flex flex-col justify-between selection:bg-tolitoli-500 selection:text-white">
+
+  <!-- Navigation Header -->
+  <header class="sticky top-0 z-50 backdrop-blur-md bg-white/80 dark:bg-slate-900/80 border-b border-slate-200/60 dark:border-slate-800 transition-colors duration-300">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#hero" class="flex items-center gap-2 text-xl font-bold tracking-tight text-slate-900 dark:text-white group">
+        <span class="w-9 h-9 rounded-xl bg-gradient-to-tr from-tolitoli-500 to-sky-500 flex items-center justify-center text-white shadow-md shadow-tolitoli-500/20 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-sparkles text-sm"></i>
+        </span>
+        <span>Masria<span class="text-tolitoli-500">.</span></span>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden md:flex items-center gap-6 text-sm font-medium">
+        <a href="#about" class="hover:text-tolitoli-600 dark:hover:text-tolitoli-500 transition-colors">Tentang</a>
+        <a href="#skills" class="hover:text-tolitoli-600 dark:hover:text-tolitoli-500 transition-colors">Karakter</a>
+        <a href="#quiz" class="hover:text-tolitoli-600 dark:hover:text-tolitoli-500 transition-colors">Kuis Tolitoli</a>
+        <a href="#guestbook" class="hover:text-tolitoli-600 dark:hover:text-tolitoli-500 transition-colors">Buku Tamu</a>
+        <a href="#contact" class="hover:text-tolitoli-600 dark:hover:text-tolitoli-500 transition-colors">Kontak</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-3">
+        <!-- Theme Toggle Button -->
+        <button id="theme-toggle" aria-label="Toggle Theme" class="p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700 transition-all focus:outline-none">
+          <i id="theme-icon-sun" class="fa-solid fa-sun text-amber-500 hidden"></i>
+          <i id="theme-icon-moon" class="fa-solid fa-moon text-indigo-400"></i>
+        </button>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button id="mobile-menu-btn" aria-label="Toggle Mobile Menu" class="md:hidden p-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300">
+          <i class="fa-solid fa-bars text-lg"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Navigation Drawer -->
+    <div id="mobile-menu" class="hidden md:hidden border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 px-4 pt-2 pb-4 space-y-2">
+      <a href="#about" class="block px-3 py-2 rounded-lg font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Tentang</a>
+      <a href="#skills" class="block px-3 py-2 rounded-lg font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Karakter</a>
+      <a href="#quiz" class="block px-3 py-2 rounded-lg font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Kuis Tolitoli</a>
+      <a href="#guestbook" class="block px-3 py-2 rounded-lg font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Buku Tamu</a>
+      <a href="#contact" class="block px-3 py-2 rounded-lg font-medium hover:bg-slate-100 dark:hover:bg-slate-800">Kontak</a>
+    </div>
+  </header>
+
+  <main class="flex-grow">
+    <!-- Hero Section -->
+    <section id="hero" class="relative py-16 sm:py-24 overflow-hidden">
+      <!-- Background Decorative Blobs -->
+      <div class="absolute -top-20 -left-20 w-72 h-72 bg-tolitoli-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="absolute top-1/2 -right-20 w-80 h-80 bg-sky-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          
+          <!-- Hero Text -->
+          <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+            <!-- Dynamic Time Badge -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold bg-tolitoli-100 dark:bg-tolitoli-700/30 text-tolitoli-700 dark:text-tolitoli-100 border border-tolitoli-500/20 shadow-sm">
+              <span id="time-icon"><i class="fa-solid fa-sun text-amber-500"></i></span>
+              <span id="dynamic-greeting">Selamat Datang!</span>
+            </div>
+
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight">
+              Halo, Saya <span class="gradient-text">Masria</span> ✨
+            </h1>
+
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+              Siswa baru yang bersemangat berasal dari <strong class="text-slate-800 dark:text-slate-100">Tolitoli, Sulawesi Tengah</strong>. Senang menjalin pertemanan, siap belajar bersama, dan selalu membawa semangat kehangatan persahabatan! 🤝✨
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+              <button onclick="openGreetModal()" class="px-6 py-3 rounded-xl font-semibold bg-gradient-to-r from-tolitoli-500 to-sky-500 hover:from-tolitoli-600 hover:to-sky-600 text-white shadow-lg shadow-tolitoli-500/25 hover:shadow-tolitoli-500/40 hover:-translate-y-0.5 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-hand-holding-heart text-lg"></i>
+                <span>Sapa Masria ✨</span>
+              </button>
+              
+              <a href="#guestbook" class="px-6 py-3 rounded-xl font-semibold border border-slate-300 dark:border-slate-700 bg-white/50 dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-200 transition-all flex items-center gap-2">
+                <i class="fa-solid fa-pen-to-square text-tolitoli-500"></i>
+                <span>Tulis Pesan</span>
+              </a>
+            </div>
+
+            <!-- Quick Stats/Badges -->
+            <div class="pt-6 grid grid-cols-3 gap-3 border-t border-slate-200 dark:border-slate-800/80 max-w-lg mx-auto lg:mx-0">
+              <div class="text-center lg:text-left">
+                <div class="text-xs text-slate-500 dark:text-slate-400">Asal Daerah</div>
+                <div class="font-bold text-slate-800 dark:text-slate-200 text-sm sm:text-base">Tolitoli 🌊</div>
+              </div>
+              <div class="text-center lg:text-left">
+                <div class="text-xs text-slate-500 dark:text-slate-400">Status</div>
+                <div class="font-bold text-slate-800 dark:text-slate-200 text-sm sm:text-base">Murid Baru 🎒</div>
+              </div>
+              <div class="text-center lg:text-left">
+                <div class="text-xs text-slate-500 dark:text-slate-400">Prinsip</div>
+                <div class="font-bold text-slate-800 dark:text-slate-200 text-sm sm:text-base">Saling Bantu 🤝</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero Graphic / Avatar Card -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative w-full max-w-sm">
+              <!-- Decorative Back glow -->
+              <div class="absolute inset-0 bg-gradient-to-tr from-tolitoli-500 to-sky-400 rounded-3xl rotate-3 blur-md opacity-30 animate-pulse"></div>
+
+              <!-- Main Card -->
+              <div class="relative glass-card rounded-3xl p-6 border border-slate-200/80 dark:border-slate-700/80 shadow-xl space-y-6">
+                <!-- Avatar Circle -->
+                <div class="relative w-32 h-32 mx-auto rounded-full bg-gradient-to-tr from-tolitoli-500 via-sky-400 to-indigo-500 p-1 shadow-lg animate-float">
+                  <div class="w-full h-full rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-4xl font-extrabold text-tolitoli-600 dark:text-tolitoli-400 overflow-hidden">
+                    <!-- SVG Avatar Illustration -->
+                    <svg class="w-20 h-20 text-tolitoli-500" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"></path>
+                    </svg>
+                  </div>
+                  <span class="absolute bottom-1 right-1 w-6 h-6 rounded-full bg-emerald-500 border-2 border-white dark:border-slate-800 flex items-center justify-center text-[10px] text-white font-bold" title="Aktif & Siap Berteman">✓</span>
+                </div>
+
+                <div class="text-center space-y-1">
+                  <h3 class="text-xl font-bold text-slate-900 dark:text-white">Masria</h3>
+                  <p class="text-xs font-medium text-tolitoli-600 dark:text-tolitoli-400">Siswa Baru & Teman Baik Kalian</p>
+                </div>
+
+                <!-- Info Badges -->
+                <div class="space-y-2 bg-slate-100/70 dark:bg-slate-800/70 p-3.5 rounded-2xl text-xs space-y-2">
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500 dark:text-slate-400"><i class="fa-solid fa-heart text-rose-500 mr-1.5"></i> Sikap:</span>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Ramah & Penolong</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500 dark:text-slate-400"><i class="fa-solid fa-tree text-emerald-500 mr-1.5"></i> Julukan Kota:</span>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Kota Cengkeh</span>
+                  </div>
+                  <div class="flex justify-between items-center">
+                    <span class="text-slate-500 dark:text-slate-400"><i class="fa-solid fa-comments text-sky-500 mr-1.5"></i> Suka:</span>
+                    <span class="font-semibold text-slate-800 dark:text-slate-200">Diskusi & Kerja Kelompok</span>
+                  </div>
+                </div>
+
+                <!-- Quick Interaction Widget -->
+                <div class="pt-2 text-center">
+                  <button id="like-btn" onclick="addLike()" class="w-full py-2.5 rounded-xl border border-rose-200 dark:border-rose-900/50 bg-rose-50 dark:bg-rose-950/30 text-rose-600 dark:text-rose-300 font-medium text-xs flex items-center justify-center gap-2 hover:bg-rose-100 dark:hover:bg-rose-900/50 transition-colors">
+                    <i class="fa-solid fa-heart text-rose-500"></i>
+                    <span>Kirim Senyuman (<span id="like-count">12</span>)</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white/60 dark:bg-slate-800/40 border-y border-slate-200/60 dark:border-slate-800">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3 mb-12">
+          <h2 class="text-xs uppercase font-bold tracking-widest text-tolitoli-600 dark:text-tolitoli-400">Mengenal Lebih Dekat</h2>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Cerita Perkenalan & Asal Daerah</p>
+          <div class="w-12 h-1 bg-gradient-to-r from-tolitoli-500 to-sky-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
+          
+          <!-- Left Card: Perkenalan Masria -->
+          <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700/70 shadow-sm flex flex-col justify-between space-y-4">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-xl bg-tolitoli-100 dark:bg-tolitoli-900/50 text-tolitoli-600 dark:text-tolitoli-300 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-user-graduate"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">Salam Kenal dari Masria!</h3>
+              <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                Hai semuanya! Nama saya <strong>Masria</strong>. Sebagai siswa baru di sekolah ini, saya sangat antusias untuk mengenal teman-teman semua dan beradaptasi dengan suasana belajar yang baru.
+              </p>
+              <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                Saya selalu percaya bahwa suasana belajar yang menyenangkan dimulai dari hubungan pertemanan yang hangat dan saling menghargai. Jika ada yang butuh teman diskusi, belajar bareng, atau sekadar mengobrol di waktu istirahat, jangan ragu untuk menyapa saya ya!
+              </p>
+            </div>
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-700/50 flex items-center gap-2 text-xs font-semibold text-tolitoli-600 dark:text-tolitoli-400">
+              <i class="fa-solid fa-quote-left"></i>
+              <span>"Berteman baik, saling bantu, dan tumbuh bersama!"</span>
+            </div>
+          </div>
+
+          <!-- Right Card: Keindahan Tolitoli -->
+          <div class="glass-card rounded-2xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700/70 shadow-sm flex flex-col justify-between space-y-4 bg-gradient-to-br from-sky-50/50 to-tolitoli-50/30 dark:from-slate-800/60 dark:to-slate-800/90">
+            <div class="space-y-4">
+              <div class="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900/50 text-sky-600 dark:text-sky-300 flex items-center justify-center text-xl font-bold">
+                <i class="fa-solid fa-water font-bold"></i>
+              </div>
+              <h3 class="text-xl font-bold text-slate-900 dark:text-white">Dari Negeri Cengkeh: Tolitoli 🌿</h3>
+              <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                Saya berasal dari Kabupaten **Tolitoli**, sebuah daerah pesisir yang indah di Sulawesi Tengah. Tolitoli terkenal sebagai **Kota Cengkeh** karena penghasil aroma cengkeh yang khas serta pemandangan pulau-pulau eksotis seperti Pulau Lutungan dan Pantai Lalos.
+              </p>
+              <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+                Masyarakat Tolitoli sangat menjunjung tinggi kehangatan dan rasa kekeluargaan. Semangat keramahan lokal inilah yang selalu saya bawa dalam berinteraksi dengan siapa saja!
+              </p>
+            </div>
+
+            <div class="pt-4 border-t border-slate-200 dark:border-slate-700/50 grid grid-cols-2 gap-2 text-center text-xs">
+              <div class="bg-white/80 dark:bg-slate-700/60 p-2 rounded-lg font-medium">🌱 Aroma Cengkeh</div>
+              <div class="bg-white/80 dark:bg-slate-700/60 p-2 rounded-lg font-medium">🏖️ Pantai Lalos</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Character & Skills Section -->
+    <section id="skills" class="py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3 mb-12">
+          <h2 class="text-xs uppercase font-bold tracking-widest text-tolitoli-600 dark:text-tolitoli-400">Karakter & Keahlian</h2>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Nilai Positif Diri Masria</p>
+          <div class="w-12 h-1 bg-gradient-to-r from-tolitoli-500 to-sky-500 mx-auto rounded-full"></div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          
+          <!-- Card 1 -->
+          <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-700/70 hover:border-tolitoli-500 dark:hover:border-tolitoli-500 transition-all hover:-translate-y-1 shadow-sm group">
+            <div class="w-12 h-12 rounded-xl bg-rose-100 dark:bg-rose-900/30 text-rose-500 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-hands-holding-child"></i>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Sangat Baik & Penolong</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Selalu siap membantu teman yang membutuhkan bimbingan atau bantuan kecil tanpa membeda-bedakan.
+            </p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-700/70 hover:border-tolitoli-500 dark:hover:border-tolitoli-500 transition-all hover:-translate-y-1 shadow-sm group">
+            <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-900/30 text-amber-500 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-bolt"></i>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Pembelajar Cepat</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Antusias mencoba hal-hal baru, cepat memahami materi sekolah, dan senang belajar mandiri maupun kelompok.
+            </p>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-700/70 hover:border-tolitoli-500 dark:hover:border-tolitoli-500 transition-all hover:-translate-y-1 shadow-sm group">
+            <div class="w-12 h-12 rounded-xl bg-sky-100 dark:bg-sky-900/30 text-sky-500 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-comments"></i>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Komunikasi Ramah</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Pendengar yang sopan, mudah diajak mengobrol, serta terbuka terhadap pandangan dan ide orang lain.
+            </p>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="glass-card p-6 rounded-2xl border border-slate-200 dark:border-slate-700/70 hover:border-tolitoli-500 dark:hover:border-tolitoli-500 transition-all hover:-translate-y-1 shadow-sm group">
+            <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-500 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform">
+              <i class="fa-solid fa-people-group"></i>
+            </div>
+            <h3 class="font-bold text-lg text-slate-900 dark:text-white mb-2">Kerja Sama Tim</h3>
+            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+              Suka berkolaborasi dalam tugas kelompok untuk mencapai hasil terbaik bersama teman-teman sekelas.
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Quiz / Fun Facts Section -->
+    <section id="quiz" class="py-16 bg-slate-100/70 dark:bg-slate-800/50 border-y border-slate-200/60 dark:border-slate-800">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3 mb-10">
+          <h2 class="text-xs uppercase font-bold tracking-widest text-tolitoli-600 dark:text-tolitoli-400">Kuis & Trivia Interaktif</h2>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Uji Pengetahuanmu tentang Tolitoli! 🎯</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Jawab 3 pertanyaan singkat ini untuk mengenal kampung halaman Masria!</p>
+        </div>
+
+        <div class="glass-card rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-md">
+          <div id="quiz-container" class="space-y-6">
+            <!-- Dynamic Quiz Content Rendered via JS -->
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Guestbook Section -->
+    <section id="guestbook" class="py-16">
+      <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="text-center max-w-2xl mx-auto space-y-3 mb-12">
+          <h2 class="text-xs uppercase font-bold tracking-widest text-tolitoli-600 dark:text-tolitoli-400">Buku Tamu Teman Sekolah</h2>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Kirim Pesan Perkenalan untuk Masria 💌</p>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Tulis ucapan selamat datang atau ajakan berteman di bawah ini!</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Form Left -->
+          <div class="lg:col-span-5 glass-card p-6 sm:p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+            <h3 class="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+              <i class="fa-solid fa-pen-nib text-tolitoli-500"></i>
+              <span>Tulis Pesanmu</span>
+            </h3>
+
+            <form id="guestbook-form" onsubmit="submitGuestbook(event)" class="space-y-4">
+              <div>
+                <label for="gb-name" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Nama Kamu *</label>
+                <input type="text" id="gb-name" required placeholder="Contoh: Budi Prasetyo" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-tolitoli-500">
+              </div>
+
+              <div>
+                <label for="gb-class" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Kelas / Teman *</label>
+                <input type="text" id="gb-class" required placeholder="Contoh: Kelas 10-A / Teman Ekstra" class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-tolitoli-500">
+              </div>
+
+              <div>
+                <label for="gb-message" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Pesan / Ucapan hangat *</label>
+                <textarea id="gb-message" rows="3" required placeholder="Halo Masria! Selamat datang di sekolah kami..." class="w-full px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-sm focus:outline-none focus:ring-2 focus:ring-tolitoli-500"></textarea>
+              </div>
+
+              <!-- Emoji Avatar Select -->
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">Pilih Badge Emoji Avatar</label>
+                <div class="flex items-center gap-2" id="emoji-picker">
+                  <button type="button" onclick="selectEmoji('😊')" class="emoji-btn w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-lg flex items-center justify-center bg-tolitoli-50 dark:bg-tolitoli-900/40 border-tolitoli-500">😊</button>
+                  <button type="button" onclick="selectEmoji('👋')" class="emoji-btn w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800">👋</button>
+                  <button type="button" onclick="selectEmoji('✨')" class="emoji-btn w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800">✨</button>
+                  <button type="button" onclick="selectEmoji('🌟')" class="emoji-btn w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800">🌟</button>
+                  <button type="button" onclick="selectEmoji('🎓')" class="emoji-btn w-9 h-9 rounded-lg border border-slate-200 dark:border-slate-700 text-lg flex items-center justify-center hover:bg-slate-100 dark:hover:bg-slate-800">🎓</button>
+                </div>
+              </div>
+
+              <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-tolitoli-500 to-sky-500 hover:from-tolitoli-600 hover:to-sky-600 text-white font-semibold text-sm shadow-md shadow-tolitoli-500/20 transition-all flex items-center justify-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i>
+                <span>Kirim Pesan</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Messages List Right -->
+          <div class="lg:col-span-7 space-y-4">
+            <div class="flex items-center justify-between px-2">
+              <h3 class="text-base font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <i class="fa-solid fa-comments text-sky-500"></i>
+                <span>Pesan dari Teman-Teman (<span id="gb-count">0</span>)</span>
+              </h3>
+              <span class="text-xs text-slate-500 dark:text-slate-400">Tersimpan secara dinamis</span>
+            </div>
+
+            <!-- Messages Container -->
+            <div id="messages-container" class="space-y-3 max-h-[480px] overflow-y-auto pr-1">
+              <!-- Rendered Dynamically -->
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-white/60 dark:bg-slate-800/40 border-t border-slate-200/60 dark:border-slate-800">
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+        
+        <div class="max-w-xl mx-auto space-y-3">
+          <h2 class="text-xs uppercase font-bold tracking-widest text-tolitoli-600 dark:text-tolitoli-400">Mari Terhubung</h2>
+          <p class="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white">Ingin Belajar atau Mengobrol Bersama?</p>
+          <p class="text-sm text-slate-600 dark:text-slate-300">
+            Masria selalu senang berkenalan dengan teman-teman sekolah. Kamu bisa menghubungi lewat kontak berikut!
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+          <!-- Email Button -->
+          <a href="mailto:masria.tolitoli@example.com" class="px-5 py-3 rounded-2xl glass-card border border-slate-200 dark:border-slate-700 hover:border-tolitoli-500 text-slate-800 dark:text-slate-200 font-semibold text-sm flex items-center gap-3 shadow-sm hover:-translate-y-0.5 transition-all">
+            <div class="w-8 h-8 rounded-lg bg-rose-100 text-rose-500 flex items-center justify-center">
+              <i class="fa-solid fa-envelope"></i>
+            </div>
+            <span>Email Masria</span>
+          </a>
+
+          <!-- Instagram Button -->
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="px-5 py-3 rounded-2xl glass-card border border-slate-200 dark:border-slate-700 hover:border-tolitoli-500 text-slate-800 dark:text-slate-200 font-semibold text-sm flex items-center gap-3 shadow-sm hover:-translate-y-0.5 transition-all">
+            <div class="w-8 h-8 rounded-lg bg-fuchsia-100 text-fuchsia-500 flex items-center justify-center">
+              <i class="fa-brands fa-instagram"></i>
+            </div>
+            <span>Instagram</span>
+          </a>
+
+          <!-- Copy Contact Info -->
+          <button onclick="copyContact()" class="px-5 py-3 rounded-2xl glass-card border border-slate-200 dark:border-slate-700 hover:border-tolitoli-500 text-slate-800 dark:text-slate-200 font-semibold text-sm flex items-center gap-3 shadow-sm hover:-translate-y-0.5 transition-all">
+            <div class="w-8 h-8 rounded-lg bg-tolitoli-100 text-tolitoli-600 flex items-center justify-center">
+              <i class="fa-solid fa-copy"></i>
+            </div>
+            <span id="copy-btn-text">Salin Kontak Info</span>
+          </button>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 py-8 text-center text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-6xl mx-auto px-4 space-y-2">
+      <p>&copy; 2026 Masria — Siswa Baru asal Tolitoli. Dibuat penuh kehangatan untuk teman-teman semua. ✨</p>
+      <p class="text-[11px] text-slate-400 dark:text-slate-600">Ramah • Baik Hati • Suka Membantu • Semangat Belajar</p>
+    </div>
+  </footer>
+
+  <!-- "Sapa Masria" Modal -->
+  <div id="greet-modal" class="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 p-4">
+    <div class="glass-card max-w-md w-full rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 shadow-2xl text-center space-y-4 scale-95 transition-transform duration-300 transform" id="greet-modal-card">
+      
+      <div class="w-16 h-16 rounded-full bg-gradient-to-tr from-tolitoli-500 to-sky-400 text-white text-3xl flex items-center justify-center mx-auto shadow-lg shadow-tolitoli-500/30">
+        👋
+      </div>
+
+      <h3 class="text-2xl font-bold text-slate-900 dark:text-white">Halo, Salam Kenal! ✨</h3>
+
+      <p class="text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+        "Terima kasih sudah mengunjungi portofolio saya! Saya Masria dari Tolitoli. Semoga hari kamu menyenangkan dan mari kita saling bantu serta jadi teman yang baik di sekolah!"
+      </p>
+
+      <div class="p-3 bg-tolitoli-50 dark:bg-tolitoli-950/40 rounded-2xl text-xs text-tolitoli-700 dark:text-tolitoli-300 font-medium">
+        🌺 Warm Greeting from Tolitoli, Central Sulawesi!
+      </div>
+
+      <button onclick="closeGreetModal()" class="w-full py-3 rounded-xl bg-tolitoli-500 hover:bg-tolitoli-600 text-white font-semibold text-sm shadow-md transition-colors">
+        Tutup & Senyum 😊
+      </button>
+    </div>
+  </div>
+
+  <!-- Custom Toast Notification -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 bg-slate-900 text-white dark:bg-white dark:text-slate-900 px-4 py-3 rounded-2xl shadow-xl text-xs font-semibold flex items-center gap-2 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+    <span id="toast-icon">✨</span>
+    <span id="toast-msg">Notifikasi</span>
+  </div>
+
+  <script>
+    /* -------------------------------------------------------------
+     * 1. Theme Toggle (Dark Mode / Light Mode)
+     * ------------------------------------------------------------- */
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const sunIcon = document.getElementById('theme-icon-sun');
+    const moonIcon = document.getElementById('theme-icon-moon');
+
+    function initTheme() {
+      const savedTheme = localStorage.getItem('masria_theme');
+      if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+      } else {
+        document.documentElement.classList.remove('dark');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+      }
+    }
+
+    themeToggleBtn.addEventListener('click', () => {
+      if (document.documentElement.classList.contains('dark')) {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('masria_theme', 'light');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+        showToast('☀️ Mode Terang Diterapkan');
+      } else {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('masria_theme', 'dark');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+        showToast('🌙 Mode Gelap Diterapkan');
+      }
+    });
+
+    initTheme();
+
+    /* -------------------------------------------------------------
+     * 2. Mobile Menu Toggle
+     * ------------------------------------------------------------- */
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    mobileMenuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking link
+    document.querySelectorAll('#mobile-menu a').forEach(link => {
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'));
+    });
+
+    /* -------------------------------------------------------------
+     * 3. Dynamic Time-based Greeting
+     * ------------------------------------------------------------- */
+    function setDynamicGreeting() {
+      const hours = new Date().getHours();
+      const greetingElem = document.getElementById('dynamic-greeting');
+      const iconElem = document.getElementById('time-icon');
+
+      if (hours >= 5 && hours < 11) {
+        greetingElem.textContent = 'Selamat Pagi, Teman-teman! 🌅';
+        iconElem.innerHTML = '<i class="fa-solid fa-sun text-amber-500"></i>';
+      } else if (hours >= 11 && hours < 15) {
+        greetingElem.textContent = 'Selamat Siang! Semangat Belajar ☀️';
+        iconElem.innerHTML = '<i class="fa-solid fa-sun text-amber-400"></i>';
+      } else if (hours >= 15 && hours < 18) {
+        greetingElem.textContent = 'Selamat Sore! Selamat Beristirahat 🌤️';
+        iconElem.innerHTML = '<i class="fa-solid fa-cloud-sun text-orange-400"></i>';
+      } else {
+        greetingElem.textContent = 'Selamat Malam! Semoga Harimu Indah 🌙';
+        iconElem.innerHTML = '<i class="fa-solid fa-moon text-indigo-400"></i>';
+      }
+    }
+
+    setDynamicGreeting();
+
+    /* -------------------------------------------------------------
+     * 4. Sapa Masria Modal & Confetti
+     * ------------------------------------------------------------- */
+    const greetModal = document.getElementById('greet-modal');
+    const greetCard = document.getElementById('greet-modal-card');
+
+    function openGreetModal() {
+      greetModal.classList.remove('opacity-0', 'pointer-events-none');
+      greetCard.classList.remove('scale-95');
+      greetCard.classList.add('scale-100');
+
+      // Trigger Confetti
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 70,
+          spread: 60,
+          origin: { y: 0.6 }
+        });
+      }
+    }
+
+    function closeGreetModal() {
+      greetModal.classList.add('opacity-0', 'pointer-events-none');
+      greetCard.classList.remove('scale-100');
+      greetCard.classList.add('scale-95');
+    }
+
+    /* -------------------------------------------------------------
+     * 5. Interactive Like Counter
+     * ------------------------------------------------------------- */
+    let likes = parseInt(localStorage.getItem('masria_likes')) || 12;
+    document.getElementById('like-count').textContent = likes;
+
+    function addLike() {
+      likes++;
+      document.getElementById('like-count').textContent = likes;
+      localStorage.setItem('masria_likes', likes);
+
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 25,
+          spread: 40,
+          origin: { y: 0.7 }
+        });
+      }
+      showToast('❤️ Terima kasih atas dukungannya!');
+    }
+
+    /* -------------------------------------------------------------
+     * 6. Tolitoli Trivia Quiz System
+     * ------------------------------------------------------------- */
+    const quizQuestions = [
+      {
+        question: "1. Apa julukan terkenal untuk Kabupaten Tolitoli?",
+        options: [
+          "A. Kota Apel",
+          "B. Kota Cengkeh",
+          "C. Kota Hujan",
+          "D. Kota Bahari"
+        ],
+        answer: 1, // Index B
+        fact: "Tolitoli dikenal sebagai Kota Cengkeh karena merupakan salah satu penghasil cengkeh kualitas terbaik di Sulawesi Tengah!"
+      },
+      {
+        question: "2. Salah satu daya tarik wisata alam unggulan Tolitoli adalah...",
+        options: [
+          "A. Candi Borobudur",
+          "B. Danau Toba",
+          "C. Pulau Lutungan & Pantai Lalos",
+          "D. Gunung Bromo"
+        ],
+        answer: 2,
+        fact: "Pulau Lutungan dan Pantai Lalos adalah destinasi kebanggaan warga Tolitoli dengan pasir putih dan keasrian air lautnya!"
+      },
+      {
+        question: "3. Sifat utama yang selalu dibawa Masria kepada teman-teman baru adalah...",
+        options: [
+          "A. Pendiam & Acuh",
+          "B. Suka Mengeluh",
+          "C. Ramah, Baik Hati, & Suka Membantu",
+          "D. Suka Menyendiri"
+        ],
+        answer: 2,
+        fact: "Tepat sekali! Masria selalu mengutamakan keramahan, kebaikan hati, dan siap saling bantu dengan semua teman sekelas."
+      }
+    ];
+
+    let currentQ = 0;
+    let score = 0;
+
+    function renderQuiz() {
+      const container = document.getElementById('quiz-container');
+      
+      if (currentQ < quizQuestions.length) {
+        const q = quizQuestions[currentQ];
+        container.innerHTML = `
+          <div class="space-y-4">
+            <div class="flex justify-between items-center text-xs font-semibold text-tolitoli-600 dark:text-tolitoli-400">
+              <span>Pertanyaan ${currentQ + 1} dari ${quizQuestions.length}</span>
+              <span>Skor: ${score}</span>
+            </div>
+            
+            <h4 class="text-base sm:text-lg font-bold text-slate-900 dark:text-white">${q.question}</h4>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+              ${q.options.map((opt, idx) => `
+                <button onclick="answerQuiz(${idx})" class="text-left p-3.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/60 dark:bg-slate-800/60 hover:border-tolitoli-500 dark:hover:border-tolitoli-500 hover:bg-tolitoli-50/50 dark:hover:bg-slate-700 transition-all text-xs sm:text-sm font-medium text-slate-800 dark:text-slate-200">
+                  ${opt}
+                </button>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      } else {
+        container.innerHTML = `
+          <div class="text-center py-6 space-y-4">
+            <div class="w-16 h-16 rounded-full bg-emerald-100 dark:bg-emerald-900/40 text-emerald-500 text-3xl flex items-center justify-center mx-auto">
+              🏆
+            </div>
+            <h4 class="text-2xl font-bold text-slate-900 dark:text-white">Kuis Selesai!</h4>
+            <p class="text-sm text-slate-600 dark:text-slate-300">
+              Kamu berhasil menjawab benar <strong class="text-tolitoli-500 font-bold">${score}</strong> dari <strong>${quizQuestions.length}</strong> pertanyaan! Now you know Tolitoli & Masria better! 🎉
+            </p>
+            <button onclick="resetQuiz()" class="px-6 py-2.5 rounded-xl bg-tolitoli-500 hover:bg-tolitoli-600 text-white font-semibold text-xs shadow-md transition-colors">
+              Ulangi Kuis 🔄
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function answerQuiz(selectedIdx) {
+      const q = quizQuestions[currentQ];
+      if (selectedIdx === q.answer) {
+        score++;
+        showToast('✅ Jawaban Benar! ' + q.fact);
+      } else {
+        showToast('❌ Kurang Tepat. ' + q.fact);
+      }
+      currentQ++;
+      renderQuiz();
+    }
+
+    function resetQuiz() {
+      currentQ = 0;
+      score = 0;
+      renderQuiz();
+    }
+
+    renderQuiz();
+
+    /* -------------------------------------------------------------
+     * 7. Guestbook System with LocalStorage
+     * ------------------------------------------------------------- */
+    let selectedEmoji = '😊';
+
+    function selectEmoji(emoji) {
+      selectedEmoji = emoji;
+      document.querySelectorAll('.emoji-btn').forEach(btn => {
+        btn.classList.remove('bg-tolitoli-50', 'dark:bg-tolitoli-900/40', 'border-tolitoli-500');
+        if (btn.textContent.trim() === emoji) {
+          btn.classList.add('bg-tolitoli-50', 'dark:bg-tolitoli-900/40', 'border-tolitoli-500');
+        }
+      });
+    }
+
+    const initialMessages = [
+      {
+        name: "Siti Rahma",
+        class: "Kelas X-1",
+        message: "Selamat datang di sekolah kami Masria! Semoga betah dan bisa belajar bareng ya!",
+        emoji: "👋",
+        time: "Kemarin"
+      },
+      {
+        name: "Rian Hidayat",
+        class: "Teman Osis",
+        message: "Salam kenal Masria dari Tolitoli! Penasaran ingin dengar cerita lebih banyak tentang Kota Cengkeh.",
+        emoji: "🌟",
+        time: "Hari ini"
+      }
+    ];
+
+    function getGuestbookMessages() {
+      const stored = localStorage.getItem('masria_guestbook');
+      if (stored) {
+        return JSON.parse(stored);
+      } else {
+        localStorage.setItem('masria_guestbook', JSON.stringify(initialMessages));
+        return initialMessages;
+      }
+    }
+
+    function renderGuestbook() {
+      const messages = getGuestbookMessages();
+      const container = document.getElementById('messages-container');
+      const countElem = document.getElementById('gb-count');
+
+      countElem.textContent = messages.length;
+
+      if (messages.length === 0) {
+        container.innerHTML = `
+          <div class="p-8 text-center text-xs text-slate-400 glass-card rounded-2xl">
+            Belum ada pesan. Jadi orang pertama yang menyapa Masria! 😊
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = messages.map((m, idx) => `
+        <div class="glass-card p-4 rounded-2xl border border-slate-200 dark:border-slate-700/80 shadow-sm space-y-2 relative group hover:border-tolitoli-500/50 transition-all">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2.5">
+              <span class="w-8 h-8 rounded-full bg-tolitoli-100 dark:bg-tolitoli-900/50 flex items-center justify-center text-base">
+                ${m.emoji || '😊'}
+              </span>
+              <div>
+                <h4 class="font-bold text-xs text-slate-900 dark:text-white">${m.name}</h4>
+                <p class="text-[10px] text-tolitoli-600 dark:text-tolitoli-400 font-medium">${m.class}</p>
+              </div>
+            </div>
+            <span class="text-[10px] text-slate-400">${m.time}</span>
+          </div>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed pl-10">
+            "${m.message}"
+          </p>
+        </div>
+      `).join('');
+    }
+
+    function submitGuestbook(e) {
+      e.preventDefault();
+      const name = document.getElementById('gb-name').value.trim();
+      const cls = document.getElementById('gb-class').value.trim();
+      const msg = document.getElementById('gb-message').value.trim();
+
+      if (!name || !cls || !msg) return;
+
+      const newEntry = {
+        name: name,
+        class: cls,
+        message: msg,
+        emoji: selectedEmoji,
+        time: 'Baru saja'
+      };
+
+      const messages = getGuestbookMessages();
+      messages.unshift(newEntry);
+      localStorage.setItem('masria_guestbook', JSON.stringify(messages));
+
+      // Reset Form
+      document.getElementById('guestbook-form').reset();
+      selectEmoji('😊');
+
+      renderGuestbook();
+      showToast('💌 Pesan berhasil dikirim ke Masria!');
+
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 40, spread: 50, origin: { y: 0.8 } });
+      }
+    }
+
+    renderGuestbook();
+
+    /* -------------------------------------------------------------
+     * 8. Copy Contact Helper
+     * ------------------------------------------------------------- */
+    function copyContact() {
+      const textToCopy = "Kontak Masria (Siswa Baru asal Tolitoli) - Email: masria.tolitoli@example.com";
+      
+      // Clipboard API with Fallback
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(textToCopy);
+      } else {
+        const textarea = document.createElement('textarea');
+        textarea.value = textToCopy;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+
+      showToast('📋 Informasi kontak berhasil disalin!');
+    }
+
+    /* -------------------------------------------------------------
+     * 9. Toast Notification System
+     * ------------------------------------------------------------- */
+    let toastTimeout;
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-msg');
+
+      toastMsg.textContent = msg;
+
+      toast.classList.remove('opacity-0', 'translate-y-20', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => {
+        toast.classList.add('opacity-0', 'translate-y-20', 'pointer-events-none');
+        toast.classList.remove('opacity-100', 'translate-y-0');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
